@@ -1,0 +1,50 @@
+# WikiCFP crawl script
+
+Usage: 
+
+$ ./all.sh [total count of wikicfp]
+
+Must know:
+1. You can see the event id of the latest CFP here [http://www.wikicfp.com/cfp/allcfp] and use it as total count.
+2. The script honors the requirement of WikiCFP that crawler should crawl no more than one page every 5 seconds [http://www.wikicfp.com/cfp/data.jsp]. And I do not recommend you to modify it.
+3. The script takes approximately 5*[total count] seconds to crawl, so it's going to be a long time. 
+
+The script will download all cfps and conference series, do information extraction and generate following files:
+
+- item.txt
+
+  It is a tsv (tab separated vetor) file in which every line is:
+
+  [conferenceID] [seriesID] [conferenceDeadline] [conferenceName]
+
+- meta.txt
+
+  It is a json file in which every line is a json string that described several meta data of a conference. The itemID part is identical to conferenceID in item.txt.
+
+- posted.txt
+
+  It is a tsv file in which every line is a post behaviour (who posted what):
+
+  [userID] [conferenceID] 2
+
+  The third column is always 2.
+
+- series.tsv
+
+  It is a tsv file in which every line is:
+
+  [conferenceID] [seriesID] [conferenceName] [seriesName]
+
+- series.txt
+
+  It is a tsv file in which every line is:
+
+  [seriesID] [seriesName]
+
+- tracked.txt
+
+  It is a tsv file in which every line is a track behaviour (who tracked what):
+
+  [userID] [conferenceID] 1
+
+  The third column is always 1. 
